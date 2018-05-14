@@ -155,24 +155,36 @@
         <!--row start-->
         <div class="row">
             <!--col-md-3 start-->
-            <div class="col-md-3 col-sm-12">
+            <div class="col-sm-2">
                 <div class="logo"><a href="/"><img src="/storage/{{ setting('site.logo') }}" style="width: 130px; height: 55px;" alt="logo booming"></a></div>
             </div>
-            <div class="col-md-7 col-sm-9">
+            <div class="col-sm-8">
                 <div class="navigationwrape">
                     <div class="navbar navbar-default" role="navigation">
                         <div class="navbar-header">
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
                         </div>
+                        @php($sousmenus = \App\Category::where('id', '<>', 6)->where('id', '<>', 5)->where('id', '<>', 4)->where('id', '<>', 3)->where('id', '<>', 2)->where('id', '<>', 1)->where('statut', 1)->OrderBy('id', 'DESC')->get())
                         <div class="navbar-collapse collapse">
                             <ul class="nav navbar-nav">
                                 <li> <a href="{{ route('home') }}"> Accueil</a></li>
                                 <li> <a href="{{ route('annonce.hotel') }}"> Hôtels</a></li>
                                 <li> <a href="{{ route('annonce.resto') }}"> Restaurants</a></li>
                                 <li> <a href="{{ route('annonce.maquis') }}"> Maquis</a></li>
-                                <li> <a href="{{ route('annonce.bar') }}"> Bars</a></li>
+                                <li> <a href="{{ route('annonce.bar') }}"> Vie Nocturne</a></li>
                                 <li> <a href="{{ route('annonce.service') }}"> Services</a></li>
-                                <li> <a href="{{ route('annonce.categorie') }}"> Autres</a></li>
+                                <li>
+                                    <a href="{{ route('annonce.categorie') }}">
+                                        Autres @if(count($sousmenus) > 0) <i class="fa fa-caret-down"></i>@endif
+                                    </a>
+                                    @if(count($sousmenus) > 0)
+                                        <ul class="dropdown-menu">
+                                            @foreach($sousmenus as $sousmenu)
+                                            <li> <a href="{{ route('annonce.by.category', ['key' => $sousmenu->id]) }}"> {{ $sousmenu->libelle }} </a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
                             </ul>
                         </div>
                         <div class="clearfix"></div>
