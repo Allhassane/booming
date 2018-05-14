@@ -1,0 +1,78 @@
+.search{
+    background-color: #5200FF;
+}
+.search .search-principal{
+    padding: 20px;
+}
+.search .form-control{
+    width: 350px;
+    height: 40px;
+}
+.search .form-control-one{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    padding-left: 5em;
+}
+.search .form-control-one-label, .search .form-control-two-label{
+    position: absolute;
+    font-weight: 600;
+    margin-left: 3px;
+    color: #000
+}
+.search .form-control-two-label{
+
+}
+
+.search .form-control-two{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    padding-left: 2.5em;
+}
+.search .logo{
+    margin-right: 10px;
+}
+.search .btn-form{
+    background-color: #4883F0;
+    border: 0 solid;
+    color: #fff;
+    font-size: 2em;
+    height: 40px;
+    overflow: hidden;
+    padding: 0 15px;
+    cursor: pointer;
+}
+.search .btn-login{
+    margin-left: 2em;
+}
+.search .btn-login, .search .btn-register{
+    border: 1px solid #4883F0;
+    font-size: 16px;
+    height: 40px;
+    padding: 6px 10px;
+    background: #fff;
+    border-radius: 5px;
+    color: #4883F0;
+    text-decoration: none;
+    transition: .2s;
+}
+.search .btn-login:hover, .search .btn-register:hover{
+    /*border: 1px solid #fff;*/
+    background-color: #4883F0;
+    color: #fff;
+}
+.search-sub-bar{
+    background-color: #4883F0;
+}
+.search-sub-bar ul {
+    list-style: none;
+    text-align: center;
+}
+.search-sub-bar ul li{
+    display: inline-block;
+    margin: 5px 20px;
+}
+.search-sub-bar ul li a{
+    color: #fff;
+    font-weight: 600;
+}
+
