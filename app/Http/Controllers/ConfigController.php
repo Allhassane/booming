@@ -108,4 +108,29 @@ class ConfigController extends Controller
 
         return redirect('/');
     }
+
+    public function reSendCode(){
+
+        $phone = Input::get('phone');
+
+        if (empty($phone)){
+            return redirect('/404');
+        }
+
+        $data = User::where('mobile', $phone)->first();
+
+        if (empty($data)){
+            return back()->with('danger', 'Numéro de téléphone inconnu');
+        }else{
+
+            /* code api sms */
+
+            User::sendSms('+'.$data->country->phonecode.''.$data->mobile, "Votre code de confirmation est $data->token");
+
+            /* end code api sms */
+
+        }
+
+        return redirect()->route('welcome', ['mobile' => addslashes($data->mobile), 'token' => bin2hex(random_bytes(32))]);
+    }
 }

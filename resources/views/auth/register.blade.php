@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-md-6 col-sm-6">
                     <div class="login">
-                        <div class="contctxt">Ou Renseignez le formulaire d'inscription</div>
+                        <div class="contctxt">Renseignez le formulaire d'inscription</div>
                         <div class="formint conForm">
                             {!! Form::open(['route' => 'register']) !!}
                                 <div class="input-wrap">
@@ -93,18 +93,29 @@
                                         </span>
                                     @endif
                                 </div>
-                                <div class="input-wrap">
-                                    <div class="alert alert-info">
-                                        Le numéro mobile doit contenir l'indicatif de votre pays. ex: +225
+                            <div class="row">
+                                <div class="col-sm-5">
+                                    <div class="input-wrap">
+                                        <select name="country_id" class="form-control" id="">
+                                            @foreach($datas as $data)
+                                                <option value="{{ $data->id }}" @if($data->phonecode == '225') selected @endif>{{ $data->nicename.' (+'.$data->phonecode.')' }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                    {!! Form::text('mobile', null, ['class' => 'form-control', 'placeholder' => 'Numéro téléphone']) !!}
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="input-wrap">
+                                        {!! Form::text('mobile', null, ['class' => 'form-control', 'placeholder' => 'ex: 57657939']) !!}
 
-                                    @if ($errors->has('mobile'))
-                                        <span class="help-block">
+                                        @if ($errors->has('mobile'))
+                                            <span class="help-block">
                                             <strong>{{ $errors->first('mobile') }}</strong>
                                         </span>
-                                    @endif
+                                        @endif
+                                    </div>
                                 </div>
+                            </div>
+
                                 <div class="input-wrap">
                                     {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Mot de Passe']) !!}
 

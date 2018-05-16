@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Country;
 use App\Mail\ConfirmationEmail;
 use App\User;
 use App\Http\Controllers\Controller;
@@ -45,6 +46,19 @@ class RegisterController extends Controller
     }
 
     /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showRegistrationForm()
+    {
+
+        $datas = Country::all();
+
+        return view('auth.register', compact('datas'));
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -85,7 +99,8 @@ class RegisterController extends Controller
             'mobile' => $data['mobile'],
             'role_id' => 3,
             'password' => bcrypt($data['password']),
-            'token' => $code
+            'token' => $code,
+            'country_id' => $data['country_id']
         ]);
     }
 
@@ -98,7 +113,9 @@ class RegisterController extends Controller
 
         /* code api sms */
 
-        User::sendSms($user->mobile, "Votre code de confirmation est $user->token");
+//        dd('+'.$user->country->phonecode.''.$user->mobile);
+
+        User::sendSms('+'.$user->country->phonecode.''.$user->mobile, "Votre code de confirmation est $user->token");
 
         /* end code api sms */
 

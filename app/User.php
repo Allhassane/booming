@@ -15,7 +15,7 @@ class User extends \TCG\Voyager\Models\User
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'mobile', 'role_id', 'token', 'verified', 'avatar'
+        'name', 'email', 'password', 'mobile', 'role_id', 'token', 'verified', 'avatar', 'country_id'
     ];
 
     /**
@@ -77,4 +77,7 @@ class User extends \TCG\Voyager\Models\User
         }
     }
 
+    public function country(){
+        return $this->belongsTo(Country::class);
+    }
 }
