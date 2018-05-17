@@ -100,10 +100,10 @@
                         <div class="clearfix"></div>
                     @else
                         <div class="register-btn"><a href="{{ route('user.account.annonce') }}">{{ Auth::user()->name }}</a> &nbsp;&nbsp;&nbsp;
-                            <a href="/logout">(<i class="fa fa-lock"></i> Déconnexion )</a> |
+                            <a href="/logout">(<i class="fa fa-lock"></i> Déconnexion )</a>
 
                             @if(Auth::user()->role_id == 2)
-                                <div style="display: inline-block;"><a href="{{ route('user.account.annonce.list') }}"> <i class="fa fa-list"></i> Mes annonces</a></div>
+                                <div style="display: inline-block;"> | <a href="{{ route('user.account.annonce.list') }}"> <i class="fa fa-list"></i> Mes annonces</a></div>
                             @endif
 
 

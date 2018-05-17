@@ -55,7 +55,7 @@
                                     </form>
                                 </div>
                                 <div class="col-sm-12">
-                                    {{--<a href="">Non je n'ai rien réçu, renvoyer le code</a>--}}
+                                    <a href="{{ route('password.mobile.resend.new', ['phone' => $data->mobile, 'token' => bin2hex(random_bytes(32))]) }}">Non je n'ai rien réçu, renvoyer le code</a>
                                 </div>
                             </div>
                         </div>

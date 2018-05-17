@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Auth\ResetPasswordController;
 use App\User;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
@@ -11,6 +11,9 @@ use Illuminate\Support\Str;
 
 class ConfigController extends Controller
 {
+
+    use ResetsPasswords;
+
     public function sendCode(Request $request){
 
         $validator = Validator::make($request->all(), [
@@ -41,7 +44,7 @@ class ConfigController extends Controller
 
                 /* code api sms */
 
-                User::sendSms($user->mobile, "Votre code de réinitialisation est $user->token");
+                User::sendSms('+'.$user->country->phonecode.''.$user->mobile, "Votre code de réinitialisation est $user->token");
 
                 /* end code api sms */
             }
@@ -91,9 +94,9 @@ class ConfigController extends Controller
 
             $user = User::where('token', $request->input('token'))->first();
 
-            $data = new ResetPasswordController();
+//            $data = new ResetPasswordController();
 
-            $data->resetPassword($user, $request->input('password'));
+            $this->resetPassword($user, $request->input('password'));
 
 //            $user->forceFill([
 //                'password' => bcrypt($request->input('password')),
@@ -132,5 +135,31 @@ class ConfigController extends Controller
         }
 
         return redirect()->route('welcome', ['mobile' => addslashes($data->mobile), 'token' => bin2hex(random_bytes(32))]);
+    }
+
+
+    public function reSendCodeNew(){
+
+        $phone = Input::get('phone');
+
+        if (empty($phone)){
+            return redirect('/404');
+        }
+
+        $data = User::where('mobile', $phone)->first();
+
+        if (empty($data)){
+            return back()->with('danger', 'Numéro de téléphone inconnu');
+        }else{
+
+            /* code api sms */
+
+            User::sendSms('+'.$data->country->phonecode.''.$data->mobile, "Votre code de réinitialisation est $data->token");
+
+            /* end code api sms */
+
+        }
+
+        return redirect()->back(); //route('welcome', ['mobile' => addslashes($data->mobile), 'token' => bin2hex(random_bytes(32))]);
     }
 }

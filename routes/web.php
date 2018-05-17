@@ -46,6 +46,7 @@ Route::get('/confirm/code', 'ConfigController@checkedCode')->name('password.mobi
 Route::post('/confirm/code', 'ConfigController@checkedCodeConfirm')->name('password.mobile.code.comfirm');
 Route::post('/confirm/code/new-password', 'ConfigController@newPassword')->name('password.mobile.request');
 Route::get('/confirm/code/resend', 'ConfigController@reSendCode')->name('password.mobile.resend');
+Route::get('/confirm/code/resend/new_password', 'ConfigController@reSendCodeNew')->name('password.mobile.resend.new');
 
 
 Route::get('/home', function (){

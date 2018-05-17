@@ -34,13 +34,14 @@
                                 {{ csrf_field() }}
 
                             <div class="input-wrap">
-                                <label for="mobile" class="control-label">Entrez votre adresse E-mail</label>
+                                <label for="mobile" class="control-label">Entrez votre numéro de téléphone</label>
 
-                                <div class="alert alert-info">
-                                    Le numéro mobile doit commencer par l'indicatif du pays
-                                </div>
+                                <br>
+                                {{--<div class="alert alert-info">--}}
+                                    {{--Le numéro mobile doit commencer par l'indicatif du pays--}}
+                                {{--</div>--}}
 
-                                <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" required autofocus>
+                                <input id="mobile" type="text" class="form-control" name="mobile" value="{{ old('mobile') }}" placeholder="Numéro de téléphone" required autofocus>
 
                                 @if ($errors->has('mobile'))
                                     <span class="help-block">
